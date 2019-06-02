@@ -5,4 +5,4 @@ This is to control my raspberry pi zero which I use as an access point
 
 Simple GET request will show the current txpower setting
 
-To set the txpower pass the sesired number in dbm
+To set the txpower pass the desired number in dbm
