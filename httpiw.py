@@ -16,8 +16,8 @@ class MyHandler(http.server.BaseHTTPRequestHandler):
             value=self.path
             try:
                 value = int(value.replace('/',''))*100
-                if value > 3200:
-                    value = 3200
+                if value > 3100:
+                    value = 3100
                 elif value < 0:
                     value = 0
                 value = str(value)
