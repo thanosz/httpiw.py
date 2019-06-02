@@ -15,7 +15,12 @@ class MyHandler(http.server.BaseHTTPRequestHandler):
         else:
             value=self.path
             try:
-                value = str(int(value.replace('/',''))*100)
+                value = int(value.replace('/',''))*100
+                if value > 3200:
+                    value = 3200
+                elif value < 0:
+                    value = 0
+                value = str(value)
             except:
                 result = "\r\nWrong input, only numbers between 0-31"
             else:
