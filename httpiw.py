@@ -10,7 +10,7 @@ class MyHandler(http.server.BaseHTTPRequestHandler):
     def do_GET(self):
         self.do_HEAD()
         output = "<xmp>"
-        if self.path=="/":
+        if self.path == "/":
         	result = subprocess.run(['iw', 'wlan0', 'info'], stdout=subprocess.PIPE).stdout.decode('utf-8')
         else:
             value=self.path
@@ -23,11 +23,8 @@ class MyHandler(http.server.BaseHTTPRequestHandler):
                 command.append(value)
                 output += "\r\nSetting txpower to " + value + '\r\n\r\n'
                 subprocess.run(command)
-
                 output += "Done\r\n\r\n"
-
                 result = subprocess.run(['iw', 'wlan0', 'info'], stdout=subprocess.PIPE).stdout.decode('utf-8')
-
 
         output += result + "</xmp>"
         self.wfile.write(bytes(output,encoding="utf-8"))
