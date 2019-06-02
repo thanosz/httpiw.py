@@ -29,11 +29,6 @@ class MyHandler(http.server.BaseHTTPRequestHandler):
         output += result + "</xmp>"
         self.wfile.write(bytes(output,encoding="utf-8"))
 
-
-
-
-
-
 if __name__ == "__main__":
     ip = "0.0.0.0"
     port = 8888
