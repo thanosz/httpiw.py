@@ -11,7 +11,7 @@ class MyHandler(http.server.BaseHTTPRequestHandler):
         self.do_HEAD()
         output = "<xmp>"
         if self.path == "/":
-        	result = subprocess.run(['iw', 'wlan0', 'info'], stdout=subprocess.PIPE).stdout.decode('utf-8')
+        	result = self.run_iw_info()
         else:
             value=self.path
             try:
@@ -24,10 +24,14 @@ class MyHandler(http.server.BaseHTTPRequestHandler):
                 output += "\r\nSetting txpower to " + value + '\r\n\r\n'
                 subprocess.run(command)
                 output += "Done\r\n\r\n"
-                result = subprocess.run(['iw', 'wlan0', 'info'], stdout=subprocess.PIPE).stdout.decode('utf-8')
+                result = self.run_iw_info()
 
         output += result + "</xmp>"
         self.wfile.write(bytes(output,encoding="utf-8"))
+
+    def run_iw_info(self):
+        return subprocess.run('iw wlan0 info'.split(), stdout=subprocess.PIPE).stdout.decode('utf-8')
+
 
 if __name__ == "__main__":
     ip = "0.0.0.0"
