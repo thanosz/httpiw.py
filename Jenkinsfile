@@ -1,22 +1,22 @@
 pipeline {
-    agent {
-        docker {
-            image 'httpiw:master'
-            args '-p 8080:9080' 
-        }
-    }
-    environment {
-        CI = 'true'
-    }
+    agent any
+
     stages {
         stage('Build') {
             steps {
-                sh 'docker build -t httpiw .'
+                echo 'Building..'
+                sh 'docker build -t httpiw:master .'
             }
         }
         stage('Test') {
             steps {
-                sh 'echo this should be the test invocation'
+                echo 'Testing..'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo 'Deploying....'
+                sh 'docker run -d -p 8888:8888 httpiw:master'
             }
         }
     }
