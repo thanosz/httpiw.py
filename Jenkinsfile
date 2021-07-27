@@ -5,7 +5,8 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building..'
-                sh 'docker build -t httpiw:master .'
+                sh 'docker build -t cicd:5000/httpiw:' + env.BRANCH_NAME + ' .'
+                sh 'docker push cicd:5000/httpiw:' + env.BRANCH_NAME + ' .'
             }
         }
         stage('Test') {
@@ -16,7 +17,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
-                sh 'docker run -d -p 8888:8888 httpiw:master'
+                sh 'docker run -d -p 8888:8888 cicd:5000/httpiw:' + env.BRANCH_NAME + 'docker-v1'
             }
         }
     }
